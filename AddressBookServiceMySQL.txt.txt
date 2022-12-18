@@ -173,3 +173,47 @@ mysql>  select * from addressbook
 | Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
 +-----------+----------+--------------+-----------------+------------+-------------+--------+
 3 rows in set (0.05 sec)
+
+
+mysql> #UC9 Ability to identify each Address Book with name and Type.
+mysql>
+mysql>  alter table addressBook add type varchar(15) after lastName;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe addressbook;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| firstName    | varchar(50) | NO   | PRI | NULL    |       |
+| lastName     | varchar(50) | NO   |     | NULL    |       |
+| type         | varchar(15) | YES  |     | NULL    |       |
+| mobileNumber | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | NO   |     | NULL    |       |
+| city         | varchar(50) | NO   |     | NULL    |       |
+| state        | varchar(50) | NO   |     | NULL    |       |
+| zip          | mediumtext  | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql>  update addressBook set type = 'Family' where firstName = 'Piyus';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressBook set type = 'Profession' where firstName='Rahul';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update addressBook set type = 'Friend' where firstName = 'Rohit';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | type       | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| Piyus     | rana     | Family     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rahul     | arya     | Profession | 7757877309   | Rohit@gmail.com | Bangalore  | Karnataka   | 543523 |
+| Rohit     | Bhandari | Friend     | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+3 rows in set (0.00 sec)
