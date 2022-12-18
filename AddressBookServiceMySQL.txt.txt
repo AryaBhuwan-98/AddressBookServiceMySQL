@@ -68,3 +68,31 @@ mysql> select * from addressbook;
 | Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
 +-----------+----------+--------------+-----------------+------------+-------------+--------+
 3 rows in set (0.00 sec)
+
+mysql>  #UC4 Ability to edit existing contat person using their name
+mysql>
+mysql> UPDATE addressBook set MobileNumber= "9758747414" where FirstName='Bhuwan';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE addressBook set Zip= "315246" where FirstName='Bhuwan';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE addressBook set State= 'Banglore' where FirstName='Bhuwan';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  UPDATE addressBook set City= 'Davanagere' where FirstName='Bhuwan';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressBook;
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| Bhuwan    | arya     | 9758747414   | bhu@gmail.com   | Davanagere | Banglore    | 315246 |
+| Piyus     | rana     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+3 rows in set (0.00 sec)
