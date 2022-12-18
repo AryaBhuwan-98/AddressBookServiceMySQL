@@ -252,3 +252,30 @@ mysql> select type, Count(type) from addressBook group by type;
 +------------+-------------+
 2 rows in set (0.00 sec)
 
+
+mysql>  #UC11 Ability to add person to both Friend and Family
+mysql>
+mysql> INSERT INTO addressbook(firstName,lastName,type,mobileNumber,email,city,state,zip) VALUES
+    -> ('Sidharth','mishra','Family','9632105478','aby@yahoo.com','haldwani','Uttarakhand',263152);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO addressbook(firstName,lastName,type,mobileNumber,email,city,state,zip) VALUES
+    -> ('Deepak','Arya','Friend','9856321478','cde@yahoo.com','haldwani','Uttarakhand',);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> ^C
+mysql> INSERT INTO addressbook(firstName,lastName,type,mobileNumber,email,city,state,zip) VALUES
+    -> ('Deepak','Arya','Friend','9856321465','xyz@yahoo.com','Rudrapur','Uttarakhand',263156);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>  select * from addressbook;
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | type       | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| Deepak    | Arya     | Friend     | 9856321465   | xyz@yahoo.com   | Rudrapur   | Uttarakhand | 263156 |
+| Piyus     | rana     | Family     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rahul     | arya     | Profession | 7757877309   | Rohit@gmail.com | Bangalore  | Karnataka   | 543523 |
+| Rohit     | Bhandari | Profession | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
+| Sidharth  | mishra   | Family     | 9632105478   | aby@yahoo.com   | haldwani   | Uttarakhand | 263152 |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+5 rows in set (0.00 sec)
+
