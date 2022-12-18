@@ -111,3 +111,29 @@ mysql> select * from addressbook;
 | Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
 +-----------+----------+--------------+-----------------+------------+-------------+--------+
 2 rows in set (0.00 sec)
+
+
+
+mysql>  #UC6 Ability to Retrieve Person belonging to a City or State from the Address Book
+mysql>
+mysql> INSERT INTO addressbook(firstName,lastName,mobileNumber,email,city,state,zip) VALUES
+    -> ('Rahul','arya','7757877309','Rohit@gmail.com','Bangalore','Karnataka',543523);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from addressbook;
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| Piyus     | rana     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rahul     | arya     | 7757877309   | Rohit@gmail.com | Bangalore  | Karnataka   | 543523 |
+| Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * from addressBook where state = 'Karnataka';
++-----------+----------+--------------+-----------------+-----------+-----------+--------+
+| firstName | lastName | mobileNumber | email           | city      | state     | zip    |
++-----------+----------+--------------+-----------------+-----------+-----------+--------+
+| Rahul     | arya     | 7757877309   | Rohit@gmail.com | Bangalore | Karnataka | 543523 |
++-----------+----------+--------------+-----------------+-----------+-----------+--------+
+1 row in set (0.00 sec)
