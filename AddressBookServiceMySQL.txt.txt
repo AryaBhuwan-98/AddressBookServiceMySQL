@@ -279,3 +279,208 @@ mysql>  select * from addressbook;
 +-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
 5 rows in set (0.00 sec)
 
+
+mysql> #UC12 Draw the ER Diagram for Address Book Service DB
+mysql>
+mysql> CREATE TABLE  contacts
+    -> (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,
+    -> mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, PRIMARY KEY(firstName));
+Query OK, 0 rows affected (0.27 sec)
+
+mysql>  describe contacts;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| firstName    | varchar(50) | NO   | PRI | NULL    |       |
+| lastName     | varchar(50) | NO   |     | NULL    |       |
+| mobileNumber | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table address (
+    ->  zip varchar(6) not null,
+    -> state varchar(30) not null,
+    -> primary key(zip));
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> describe address;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| zip   | varchar(6)  | NO   | PRI | NULL    |       |
+| state | varchar(30) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE address
+    -> ADD city varchar(50);
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe address;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| zip   | varchar(6)  | NO   | PRI | NULL    |       |
+| state | varchar(30) | NO   |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table contacts_address(
+    -> firstname varchar(30) not null,
+    -> zip varchar(6) not null,
+    -> foreign key (firstname) references contacts(firstname),
+    -> foreign key (zip) references address(zip));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql>  desc contacts_address;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| firstname | varchar(30) | NO   | MUL | NULL    |       |
+| zip       | varchar(6)  | NO   | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table relations(
+    ->  type varchar(15),
+    -> primary key(type));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc relations;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| type  | varchar(15) | NO   | PRI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql>  create table contacts_relation(
+    -> firstname varchar(30) not null,
+    -> type varchar(15),
+    ->  foreign key (firstname) references contacts(firstname),
+    -> foreign key(type) references relations(type));
+Query OK, 0 rows affected (0.18 sec)
+
+mysql>  desc contacts_relation;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| firstname | varchar(30) | NO   | MUL | NULL    |       |
+| type      | varchar(15) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into contacts values('Bhaskar','Arya','9219918958','abc@gmail.com'),
+    -> ('Neeraj','Prakash','6254782145','rohit@gmail.com'),
+    -> ('Hritik','Sharma','6587425445','hritik@yahoo.com');
+Query OK, 3 rows affected (0.10 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from contacts;
++-----------+----------+--------------+------------------+
+| firstName | lastName | mobileNumber | email            |
++-----------+----------+--------------+------------------+
+| Bhaskar   | Arya     | 9219918958   | abc@gmail.com    |
+| Hritik    | Sharma   | 6587425445   | hritik@yahoo.com |
+| Neeraj    | Prakash  | 6254782145   | rohit@gmail.com  |
++-----------+----------+--------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into relations values('family'),('friend'),('work');
+Query OK, 3 rows affected (0.09 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from relations;
++--------+
+| type   |
++--------+
+| family |
+| friend |
+| work   |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into address values ('263126','Dehradun','Uttarkhand'),
+    -> ('263125','Guwahati','Assam'),
+    -> ('263124','Banglore','Karnatak');
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>  select * from address;
++--------+----------+------------+
+| zip    | state    | city       |
++--------+----------+------------+
+| 263124 | Banglore | Karnatak   |
+| 263125 | Guwahati | Assam      |
+| 263126 | Dehradun | Uttarkhand |
++--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into contacts_relation values
+    -> ( 'Hritik', 'friend'),
+    -> ( 'Neeraj', 'family'),
+    -> ( 'Hritik', 'friend');
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>  select * from contacts_relation;
++-----------+--------+
+| firstname | type   |
++-----------+--------+
+| Hritik    | friend |
+| Neeraj    | family |
+| Hritik    | friend |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql>  insert into contacts_address values ('Hritik','263124');
+Query OK, 1 row affected (0.03 sec)
+
+mysql>  insert into contacts_address values ('Neeraj','263125');
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into contacts_address values ('Hritik','263126');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from contacts_address;
++-----------+--------+
+| firstname | zip    |
++-----------+--------+
+| Hritik    | 263124 |
+| Neeraj    | 263125 |
+| Hritik    | 263126 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+
+mysql> #UC13 Ensure all retrieve queries done especially in UC 6, UC 7, UC 8 and UC 10 are working with new table structure
+mysql>
+mysql> select count(contacts.firstname) from contacts,contacts_address,address
+    ->  where contacts.firstname = contacts_address.firstname and contacts_address.zip = address.zip and address.state = 'Uttarakhand';
++---------------------------+
+| count(contacts.firstname) |
++---------------------------+
+|                         0 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(contacts.firstname) from contacts,contacts_address,address
+    -> where contacts.firstname = contacts_address.firstname and contacts_address.zip = address.zip and address.city = 'Uttarakhand';
++---------------------------+
+| count(contacts.firstname) |
++---------------------------+
+|                         0 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql>  select type, Count(firstName) from contacts_relation group by type;
++--------+------------------+
+| type   | Count(firstName) |
++--------+------------------+
+| family |                1 |
+| friend |                2 |
++--------+------------------+
+2 rows in set (0.00 sec)
