@@ -217,3 +217,38 @@ mysql> select * from addressbook;
 | Rohit     | Bhandari | Friend     | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
 +-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
 3 rows in set (0.00 sec)
+
+
+mysql> #UC10 Ability to get number of contact persons i.e. count by type
+mysql>
+mysql> update addressBook set type = 'Family' where firstName = 'Piyus';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>  update addressBook set type = 'Profession' where firstName='Rahul';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>  update addressBook set type = 'Profession' where firstName='Rohit';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | type       | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+| Piyus     | rana     | Family     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rahul     | arya     | Profession | 7757877309   | Rohit@gmail.com | Bangalore  | Karnataka   | 543523 |
+| Rohit     | Bhandari | Profession | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
++-----------+----------+------------+--------------+-----------------+------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select type, Count(type) from addressBook group by type;
++------------+-------------+
+| type       | Count(type) |
++------------+-------------+
+| Family     |           1 |
+| Profession |           2 |
++------------+-------------+
+2 rows in set (0.00 sec)
+
