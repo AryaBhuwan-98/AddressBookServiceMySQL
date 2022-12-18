@@ -23,3 +23,27 @@ mysql> show databases;
 | world              |
 +--------------------+
 10 rows in set (0.06 sec)
+
+
+ #UC2 Ability to create a Address Book Table with first and last names, address,city,state, zip, phone number and email as its attributes
+mysql>
+mysql> USE AddressBookService;
+Database changed
+mysql> create table addressbook
+    -> (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, city varchar(50) NOT NULL, state varchar(50) NOT NULL,
+    -> zip long NOT NULL, PRIMARY KEY(firstName));
+Query OK, 0 rows affected (0.59 sec)
+
+mysql>  describe addressbook;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| firstName    | varchar(50) | NO   | PRI | NULL    |       |
+| lastName     | varchar(50) | NO   |     | NULL    |       |
+| mobileNumber | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | NO   |     | NULL    |       |
+| city         | varchar(50) | NO   |     | NULL    |       |
+| state        | varchar(50) | NO   |     | NULL    |       |
+| zip          | mediumtext  | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
