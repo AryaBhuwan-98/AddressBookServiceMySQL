@@ -96,3 +96,18 @@ mysql> select * from addressBook;
 | Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
 +-----------+----------+--------------+-----------------+------------+-------------+--------+
 3 rows in set (0.00 sec)
+
+
+mysql> #UC5 Ability to delete a person using person's name
+mysql>
+mysql> DELETE from addressBook where FirstName='Bhuwan';
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from addressbook;
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| firstName | lastName | mobileNumber | email           | city       | state       | zip    |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+| Piyus     | rana     | 9370785156   | piyus@gmail.com | kusumkhera | Uttarakhand | 312412 |
+| Rohit     | Bhandari | 7757877309   | Rohit@gmail.com | Rudrapur   | Uttarakhand | 241324 |
++-----------+----------+--------------+-----------------+------------+-------------+--------+
+2 rows in set (0.00 sec)
